@@ -36,14 +36,14 @@ function printc()
         bg[_-]cyan|bgcyan)       CODE='46;' ;;
         bg[_-]white|bgwhite)     CODE='47;' ;;
         # Код начертания:
-        b|bold)   CODE='1;' ;;
-        i|italic) CODE='3;' ;;
+        b|bold)   CODE='01;' ;;
+        i|italic) CODE='03;' ;;
         # Код яркости/мигания:
-        light|faint|pale) CODE='2;' ;;
-        blink) CODE='5;' ;;
+        light|faint|pale) CODE='02;' ;;
+        blink) CODE='05;' ;;
         # Код всевозможных черточек:
-        under|underline)       CODE='4;'  ;;
-        strike)                CODE='9;'  ;;
+        under|underline)       CODE='04;'  ;;
+        strike)                CODE='09;'  ;;
         dblunder|dblunderline) CODE='21;' ;;
         over|overline  )       CODE='53;' ;;
         # Код запрета переноса строки:
@@ -57,8 +57,6 @@ function printc()
       fi
 
     done
-
-
 
     # Собираем управляющую последовательность (escape code)
     if [ -n "$DECOR" ]; then
@@ -74,11 +72,11 @@ function printc()
     done
     TEXT=$@
 
-    # Печатаем. 
+    # Печатаем.
     printf "%b" "$ESC_CODE$TEXT$NEWLINE"
 
     # Сбрасываем все установленные атрибуты
-    echo -en "\033[0m"
+    echo -en "\033[00m"
     # tput sgr0
   )
 }
